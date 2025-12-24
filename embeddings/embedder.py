@@ -69,7 +69,8 @@ class EmbeddingGenerator:
                 "doc_id": c["doc_id"],
                 "section_id": c["section_id"],
                 "token_count": c["token_count"],
-                "chunking_strategy": c["chunking_strategy"]
+                "chunking_strategy": c["chunking_strategy"],
+                "text": c["text"]   # ← THIS MUST EXIST
             }
             for c in chunks
         ]

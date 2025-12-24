@@ -54,8 +54,10 @@ class DenseRetriever:
                 "doc_id": self.metadata[idx]["doc_id"],
                 "section_id": self.metadata[idx]["section_id"],
                 "token_count": self.metadata[idx]["token_count"],
-                "chunking_strategy": self.metadata[idx]["chunking_strategy"]
+                "chunking_strategy": self.metadata[idx]["chunking_strategy"],
+                "text": self.metadata[idx].get("text", "")
             }
+
             results.append(result)
 
         return results
