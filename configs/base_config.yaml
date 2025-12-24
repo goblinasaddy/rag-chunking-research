@@ -1,0 +1,126 @@
+# ================================
+# Base Configuration for RAG Chunking Study
+# ================================
+# This file defines all FIXED components of the pipeline.
+# Chunking-specific parameters are overridden per experiment.
+# Changing this file mid-experiment INVALIDATES comparisons.
+# ================================
+
+project:
+  name: "rag_chunking_research"
+  description: "Comparative Study of Chunking Strategies in RAG"
+  random_seed: 42
+
+# ================================
+# Data Configuration
+# ================================
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+
+  # Input document (institutional policy / rulebook)
+  document:
+    format: "pdf"
+    encoding: "utf-8"
+    preserve_paragraphs: true
+    preserve_sentences: true
+
+  # Question-answer dataset
+  qa_pairs:
+    file: "data/processed/questions.json"
+    answer_field: "answer"
+    question_field: "question"
+
+# ================================
+# Chunking (DEFAULTS — overridden per experiment)
+# ================================
+chunking:
+  strategy: "fixed"          # fixed | fixed_overlap | sentence | semantic
+  chunk_size: 512            # tokens (used for fixed strategies)
+  overlap_ratio: 0.2         # only used for fixed_overlap
+  semantic_similarity_threshold: 0.75  # only for semantic chunking
+  min_chunk_tokens: 50
+
+# ================================
+# Embeddings
+# ================================
+embeddings:
+  model_name: "sentence-transformers/all-MiniLM-L6-v2"
+  device: "cpu"
+  normalize: true
+  batch_size: 32
+
+# ================================
+# Vector Store / Retrieval
+# ================================
+retriever:
+  type: "dense"
+  top_k: 5
+  similarity_metric: "cosine"
+
+# ================================
+# LLM Configuration
+# ================================
+llm:
+  provider: "gemini"        
+  model_name: "gemini-2.5-flash" # FIXED across all experiments
+  temperature: 0.0
+  max_tokens: 512
+
+# ================================
+# Prompt Template
+# ================================
+prompt:
+  system_prompt: |
+    You are an AI assistant that answers questions strictly
+    using the provided context. If the answer is not contained
+    in the context, say "The information is not available in the document."
+
+  user_prompt_template: |
+    Context:
+    {context}
+
+    Question:
+    {question}
+
+    Answer:
+
+# ================================
+# Evaluation Configuration
+# ================================
+evaluation:
+  retrieval_metrics:
+    - recall_at_k
+    - precision_at_k
+    - hit_rate
+
+  generation_metrics:
+    - answer_correctness
+    - faithfulness
+    - hallucination
+
+  llm_judge:
+    enabled: true
+    model_name: "gpt-4o-mini"
+    temperature: 0.0
+
+# ================================
+# Logging & Output
+# ================================
+logging:
+  log_dir: "results/logs"
+  save_retrieved_chunks: true
+  save_llm_outputs: true
+  verbose: false
+
+results:
+  tables_dir: "results/tables"
+  figures_dir: "results/figures"
+
+# ================================
+# Reproducibility
+# ================================
+reproducibility:
+  fix_random_seed: true
+  log_config: true
+  log_versions: true
