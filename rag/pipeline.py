@@ -7,6 +7,8 @@ from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
 
 from retriever.dense_retriever import DenseRetriever
+from google.api_core.exceptions import ResourceExhausted
+
 
 
 class RAGPipeline:
@@ -51,11 +53,7 @@ class RAGPipeline:
 
         return "\n\n".join(context_blocks)
 
-    def generate_answer(
-        self,
-        query: str,
-        context: str
-    ) -> str:
+    def generate_answer(self, query: str, context: str) -> str:
         prompt = f"""
 You are an AI assistant answering questions strictly
 using the provided context.
@@ -72,14 +70,19 @@ Question:
 Answer:
 """
 
-        response = self.llm.generate_content(
-            prompt,
-            generation_config={
-                "temperature": self.temperature
-            }
-        )
+        while True:
+            try:
+                response = self.llm.generate_content(
+                    prompt,
+                    generation_config={
+                        "temperature": self.temperature
+                    }
+                )
+                return response.text.strip()
 
-        return response.text.strip()
+            except ResourceExhausted as e:
+                wait_time = 25
+                print
 
     def run(self, query: str) -> Dict:
         """
