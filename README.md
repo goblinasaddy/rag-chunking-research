@@ -56,7 +56,7 @@ To answer this, we conduct controlled retrieval-only experiments that isolate th
 ## 🏗️ Project Structure
 
 rag-chunking-research/
-│
+|
 ├── data/
 │   ├── raw/
 │   │   └── rulebook.pdf              # Source document
@@ -109,6 +109,7 @@ rag-chunking-research/
 ├── README.md
 ├── requirements.txt
 └── references.bib
+
 
 
 ---
