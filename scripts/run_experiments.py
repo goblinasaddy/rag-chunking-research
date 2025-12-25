@@ -1,23 +1,17 @@
 import json
-import os
-from pathlib import Path
 import csv
 import time
+from pathlib import Path
 
 from embeddings.embedder import EmbeddingGenerator
 from retriever.dense_retriever import DenseRetriever
-from rag.pipeline import RAGPipeline
-
 from evaluation.retrieval_metrics import compute_retrieval_metrics
-from evaluation.generation_metrics import compute_generation_metrics
-from evaluation.hallucination import detect_hallucination
 
 
 # =============================
 # CONFIG
 # =============================
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-LLM_MODEL = "gemini-2.5-flash"
 TOP_K = 5
 
 CHUNKING_STRATEGIES = [
@@ -32,10 +26,6 @@ CHUNKS_DIR = Path("data/processed")
 RESULTS_DIR = Path("results/tables")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-if GEMINI_API_KEY is None:
-    raise RuntimeError("Set GEMINI_API_KEY as an environment variable")
-
 
 # =============================
 # LOAD QUESTIONS
@@ -47,20 +37,20 @@ print(f"Loaded {len(questions)} questions.")
 
 
 # =============================
-# HELPER: count completed rows
+# HELPER
 # =============================
 def count_completed_rows(csv_path: Path) -> int:
     if not csv_path.exists():
         return 0
     with open(csv_path, "r", encoding="utf-8") as f:
-        return max(0, sum(1 for _ in f) - 1)  # exclude header
+        return max(0, sum(1 for _ in f) - 1)  # minus header
 
 
 # =============================
-# MAIN EXPERIMENT LOOP
+# MAIN LOOP
 # =============================
 for strategy in CHUNKING_STRATEGIES:
-    print(f"\n=== Running experiments for: {strategy} ===")
+    print(f"\n=== Retrieval-only experiments for: {strategy} ===")
 
     chunks_path = CHUNKS_DIR / f"{strategy}_chunks.json"
     if not chunks_path.exists():
@@ -80,7 +70,7 @@ for strategy in CHUNKING_STRATEGIES:
 
     embeddings, metadata = embedder.generate(
         chunks=chunks,
-        experiment_id=f"{strategy}_final"
+        experiment_id=f"{strategy}_retrieval_only"
     )
 
     # -------------------------
@@ -93,21 +83,9 @@ for strategy in CHUNKING_STRATEGIES:
     retriever.build_index(embeddings, metadata)
 
     # -------------------------
-    # RAG Pipeline
+    # CSV (resumable)
     # -------------------------
-    rag = RAGPipeline(
-        embedding_model_name=EMBEDDING_MODEL,
-        retriever=retriever,
-        gemini_api_key=GEMINI_API_KEY,
-        llm_model_name=LLM_MODEL,
-        temperature=0.0
-    )
-
-    # -------------------------
-    # Output CSV (resumable)
-    # -------------------------
-    output_csv = RESULTS_DIR / f"{strategy}_results.csv"
-
+    output_csv = RESULTS_DIR / f"{strategy}_retrieval_only.csv"
     completed_rows = count_completed_rows(output_csv)
     print(f"Resuming from question {completed_rows + 1}")
 
@@ -117,20 +95,14 @@ for strategy in CHUNKING_STRATEGIES:
         fieldnames = [
             "question",
             "gold_answer",
-            "answer",
             "chunking_strategy",
             "recall_at_k",
             "precision_at_k",
             "hit_rate",
-            "answer_correctness",
-            "faithfulness",
-            "hallucination",
-            "hallucination_type",
-            "latency_sec"
+            "retrieval_latency_sec"
         ]
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         if write_header:
             writer.writeheader()
 
@@ -146,48 +118,32 @@ for strategy in CHUNKING_STRATEGIES:
             query = qa["question"]
             gold_answer = qa["answer"]
 
-            start_time = time.time()
-            result = rag.run(query)
-            latency = time.time() - start_time
+            start = time.time()
 
-            retrieval_metrics = compute_retrieval_metrics(
-                retrieved_chunks=result["retrieved_chunks"],
+            # 🔹 Explicit query embedding
+            query_embedding = embedder.embed_query(query)
+            retrieved_chunks = retriever.retrieve(query_embedding)
+
+            latency = time.time() - start
+
+            metrics = compute_retrieval_metrics(
+                retrieved_chunks=retrieved_chunks,
                 gold_answer=gold_answer,
                 k=TOP_K
-            )
-
-            generation_metrics = compute_generation_metrics(
-                answer=result["answer"],
-                gold_answer=gold_answer,
-                context=result["context"]
-            )
-
-            hallucination_info = detect_hallucination(
-                answer=result["answer"],
-                context=result["context"],
-                gold_answer=gold_answer
             )
 
             writer.writerow({
                 "question": query,
                 "gold_answer": gold_answer,
-                "answer": result["answer"],
                 "chunking_strategy": strategy,
-                "recall_at_k": retrieval_metrics["recall_at_k"],
-                "precision_at_k": retrieval_metrics["precision_at_k"],
-                "hit_rate": retrieval_metrics["hit_rate"],
-                "answer_correctness": generation_metrics["answer_correctness"],
-                "faithfulness": generation_metrics["faithfulness"],
-                "hallucination": generation_metrics["hallucination"],
-                "hallucination_type": hallucination_info["type"],
-                "latency_sec": round(latency, 3)
+                "recall_at_k": metrics["recall_at_k"],
+                "precision_at_k": metrics["precision_at_k"],
+                "hit_rate": metrics["hit_rate"],
+                "retrieval_latency_sec": round(latency, 4)
             })
 
-            csvfile.flush()  # CRITICAL: ensures progress is saved
-
-            # Throttle to avoid 429s
-            time.sleep(15)
+            csvfile.flush()
 
     print(f"Saved results → {output_csv}")
 
-print("\nAll experiments completed successfully.")
+print("\nAll retrieval-only experiments completed successfully.")

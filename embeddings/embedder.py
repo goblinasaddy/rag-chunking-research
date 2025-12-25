@@ -80,6 +80,18 @@ class EmbeddingGenerator:
             json.dump(metadata, f, indent=2)
 
         return embeddings, metadata
+    
+    def embed_query(self, query: str):
+        """
+        Embed a single query string.
+        Returns a 1D numpy array.
+    """
+        embedding = self.model.encode(
+            query,
+            convert_to_numpy=True,
+            normalize_embeddings=self.normalize
+        )
+        return embedding
 
 
 # -------------------------

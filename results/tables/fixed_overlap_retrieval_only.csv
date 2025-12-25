@@ -1,0 +1,68 @@
+question,gold_answer,chunking_strategy,recall_at_k,precision_at_k,hit_rate,retrieval_latency_sec
+What type of education group is Amity Education Group?,one of India's leading private non-profit education groups,fixed_overlap,0.0,0.0,0.0,0.0036
+From which level to which level does Amity offer education?,right from pre-school to post-doctoral level,fixed_overlap,0.0,0.0,0.0,0.0095
+How many students does Amity have?,"over 2,00,000 students",fixed_overlap,0.0,0.0,0.0,0.0122
+How many alumni are part of Amity Education Group?,"7,00,000 alumni",fixed_overlap,0.0,0.0,0.0,0.0084
+How many faculty members and scientists does Amity have?,"6,000 faculty members and scientists",fixed_overlap,0.0,0.0,0.0,0.0092
+How many universities does Amity operate in India?,12 Universities,fixed_overlap,1.0,0.2,1.0,0.0102
+Who is the Founder President of Amity Education Group?,Dr. Ashok K. Chauhan,fixed_overlap,1.0,0.4,1.0,0.0074
+Who is the Chancellor of Amity University?,Dr. Atul Chauhan,fixed_overlap,1.0,0.4,1.0,0.0074
+What education system does AUUP follow?,Fully Flexible Choice Based Credit System,fixed_overlap,1.0,0.4,1.0,0.0062
+What does OBE stand for?,Outcome Based Education,fixed_overlap,1.0,0.4,1.0,0.008
+How long does each semester last?,15-18 weeks of teaching and learning,fixed_overlap,0.0,0.0,0.0,0.0081
+What is a credit hour defined as?,one hour of instruction per week over the entire semester of minimum 15 weeks,fixed_overlap,0.0,0.0,0.0,0.008
+Which policy outlines key features for higher education in India?,National Education Policy 2020,fixed_overlap,1.0,0.2,1.0,0.0055
+What is mandatory for all students under Academic Bank of Credits?,register for their ABC/APAAR ID,fixed_overlap,0.0,0.0,0.0,0.0043
+How many credit units are offered for internship/apprenticeship?,20 credit units,fixed_overlap,1.0,0.2,1.0,0.0071
+In which semesters is apprenticeship/internship offered?,5th & 6th semester,fixed_overlap,1.0,0.2,1.0,0.0077
+Can students pursue two degrees simultaneously?,two academic programmes,fixed_overlap,1.0,0.2,1.0,0.0066
+At the end of which years can students exit a programme?,"1st Year, 2nd Year and 3rd Year",fixed_overlap,0.0,0.0,0.0,0.0075
+What is awarded after completion of one year of the programme?,undergraduate certificate,fixed_overlap,1.0,0.2,1.0,0.0056
+Within how many years can a student re-enter after exit?,within a period of three years,fixed_overlap,0.0,0.0,0.0,0.0104
+What language credits must students opt for each semester?,02 credits,fixed_overlap,0.0,0.0,0.0,0.0074
+What programme provides global exposure through international study?,Study Abroad Programme (SAP),fixed_overlap,0.0,0.0,0.0,0.0073
+How many continents are covered under the 3C programme?,3 different continents,fixed_overlap,0.0,0.0,0.0,0.0085
+What regulation governs examinations at AUUP?,Regulation R01,fixed_overlap,0.0,0.0,0.0,0.0094
+What are the two main components of student evaluation?,Continuous Internal Assessment and End Semester Examinations,fixed_overlap,0.0,0.0,0.0,0.0074
+What is the expected attendance percentage for students?,100% attendance,fixed_overlap,0.0,0.0,0.0,0.0081
+What is the minimum attendance required to appear in End Semester Examination?,75%,fixed_overlap,0.0,0.0,0.0,0.0085
+How many days of continuous absence leads to striking off a student’s name?,30 days,fixed_overlap,1.0,0.2,1.0,0.008
+What fee is charged for re-admission after name is struck off?,Rs. 15000/-,fixed_overlap,0.0,0.0,0.0,0.0078
+What percentage relaxation in attendance may be allowed?,maximum 25%,fixed_overlap,0.0,0.0,0.0,0.0061
+Who notifies the examination schedule?,Controller of Examinations,fixed_overlap,1.0,0.6,1.0,0.0059
+What document is mandatory to appear in an examination?,valid Admit Card,fixed_overlap,1.0,0.2,1.0,0.0084
+What is the fee for issuance of a Duplicate Admit Card?,"Rs. 1,000/-",fixed_overlap,0.0,0.0,0.0,0.0089
+In which mode are examinations primarily conducted?,Physical Mode,fixed_overlap,1.0,0.4,1.0,0.0061
+What electronic devices are prohibited during examinations?,"mobile phone, smart watch, laptop or any electronic device",fixed_overlap,1.0,0.2,1.0,0.0054
+Which grade indicates Outstanding performance?,A+,fixed_overlap,0.0,0.0,0.0,0.0061
+What grade is awarded for Fail?,F,fixed_overlap,1.0,1.0,1.0,0.0073
+What is the minimum SGPA required to pass an undergraduate certificate?,4.00,fixed_overlap,0.0,0.0,0.0,0.0066
+What is the minimum CGPA required for First Division with Distinction in UG?,8.50 and above,fixed_overlap,0.0,0.0,0.0,0.0071
+What is Amity University's approach to learning?,"multidisciplinary, holistic and inclusive education",fixed_overlap,0.0,0.0,0.0,0.0062
+What kind of professionals does the curriculum aim to develop?,T-shaped Professionals,fixed_overlap,0.0,0.0,0.0,0.0095
+Which regulatory bodies guide credit determination?,UGC / AICTE & other relevant Regulatory bodies,fixed_overlap,0.0,0.0,0.0,0.0078
+What represents the quantum of syllabus in a course?,Credit,fixed_overlap,1.0,0.4,1.0,0.0066
+What is the minimum teaching duration of a semester?,minimum of 15 weeks teaching,fixed_overlap,1.0,0.2,1.0,0.0084
+How many assessment components are required for internal evaluation?,Minimum 3 assessment components,fixed_overlap,0.0,0.0,0.0,0.0072
+What does NEP 2020 emphasize for higher education?,Multidisciplinary Approach,fixed_overlap,1.0,0.2,1.0,0.008
+What values must higher education develop according to NEP 2020?,ethical and Constitutional values,fixed_overlap,1.0,0.2,1.0,0.0019
+What type of education integrates human values and service?,Value-based education,fixed_overlap,0.0,0.0,0.0,0.0081
+Which universal values are included in value-based education?,"truth (satya), righteous conduct (dharma), peace (shanti), love (prem), nonviolence (ahimsa)",fixed_overlap,0.0,0.0,0.0,0.0062
+What type of learning improves employability through practice?,internships/apprenticeship,fixed_overlap,0.0,0.0,0.0,0.0091
+Which framework guides multidisciplinary education at AUUP?,UGC Curriculum and Credit Framework for Under Graduate Programmes,fixed_overlap,1.0,0.2,1.0,0.0088
+What does ABC digitally store?,academic credits earned,fixed_overlap,0.0,0.0,0.0,0.0079
+Can credits be transferred between institutions?,can be transferred / redeemed,fixed_overlap,0.0,0.0,0.0,0.0016
+What is considered the most efficient structured training?,Apprenticeship/Internship,fixed_overlap,0.0,0.0,0.0,0.0117
+Which skills are developed during apprenticeship?,"problem-solving, creative thinking, digital skills, teamwork",fixed_overlap,0.0,0.0,0.0,0.0048
+Which modes are allowed for pursuing two degrees?,full-time physical mode and Open and Distance learning (ODL) or Online mode,fixed_overlap,0.0,0.0,0.0,0.0036
+What must students submit to exit a programme?,an undertaking giving the reasons for exit,fixed_overlap,0.0,0.0,0.0,0.0093
+What is compulsory during exit to re-enter later?,4-6 credits skills-enhancement course(s),fixed_overlap,0.0,0.0,0.0,0.0087
+What is the maximum time to complete a four year degree after re-entry?,within the maximum period of seven years,fixed_overlap,1.0,0.4,1.0,0.0098
+What does lateral entry not allow?,not be allowed in the first year,fixed_overlap,1.0,0.2,1.0,0.002
+Which courses develop social and ethical values?,Human Value & Community Outreach (HVCO),fixed_overlap,0.0,0.0,0.0,0.0104
+Which course credits are excluded from SGPA and CGPA?,Progressive Value-Added Course,fixed_overlap,0.0,0.0,0.0,0.005
+How is gender sensitization implemented?,amalgamation of theory and practice,fixed_overlap,1.0,0.2,1.0,0.0097
+Which programme depends on MoUs with global universities?,Semester Abroad Programme,fixed_overlap,1.0,0.2,1.0,0.0039
+Which countries are involved in the 3C Programme?,"Asia, Europe and America",fixed_overlap,0.0,0.0,0.0,0.005
+Who should students consult for international programme details?,Programme Leader/ Head of Institution,fixed_overlap,0.0,0.0,0.0,0.0097
+Which calendar plans yearly academic activities?,Block Academic Calendar,fixed_overlap,1.0,0.4,1.0,0.0092
