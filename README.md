@@ -9,7 +9,7 @@ The project presents a systematic, retrieval-focused evaluation of different doc
 
 ---
 
-## 🔍 Motivation
+##  Motivation
 
 Retrieval-Augmented Generation (RAG) systems rely heavily on how source documents are segmented before indexing. While dense retrieval and embedding models have received extensive attention, **document chunking strategies are often treated as a heuristic preprocessing step**.
 
@@ -21,7 +21,7 @@ To answer this, we conduct controlled retrieval-only experiments that isolate th
 
 ---
 
-## 🧠 Key Contributions
+##  Key Contributions
 
 - Empirical comparison of **four chunking strategies** under a unified retrieval framework
     
@@ -36,7 +36,7 @@ To answer this, we conduct controlled retrieval-only experiments that isolate th
 
 ---
 
-## 🧩 Chunking Strategies Evaluated
+##  Chunking Strategies Evaluated
 
 1. **Fixed Chunking**  
     Segments text into fixed-length chunks without overlap.
@@ -53,7 +53,7 @@ To answer this, we conduct controlled retrieval-only experiments that isolate th
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 rag-chunking-research/
 |
@@ -114,7 +114,7 @@ rag-chunking-research/
 
 ---
 
-## ⚙️ Experimental Setup
+##  Experimental Setup
 
 - **Embedding Model:** `all-MiniLM-L6-v2` (Sentence-Transformers)
     
@@ -131,7 +131,7 @@ All chunking strategies are evaluated under identical conditions to ensure fair 
 
 ---
 
-## 📊 Key Results (Summary)
+##  Key Results (Summary)
 
 | Chunking Strategy | Mean Recall@k | Mean Precision@k |
 | ----------------- | ------------- | ---------------- |
@@ -146,7 +146,7 @@ Sentence-based chunking consistently outperforms more complex semantic segmentat
 
 ---
 
-## 📈 Visualizations
+##  Visualizations
 
 The repository includes publication-ready plots comparing retrieval performance across chunking strategies:
 
@@ -161,7 +161,7 @@ Plots are available under `results/plots/` and are used directly in the research
 
 ---
 
-## 📄 Paper
+##  Paper
 
 The full paper is written in LaTeX (IEEE conference format) and includes:
 
@@ -178,7 +178,7 @@ The paper is intended for submission to **arXiv** and relevant **NLP / IR worksh
 
 ---
 
-## 🧪 Reproducibility
+##  Reproducibility
 
 To reproduce experiments:
 
@@ -206,7 +206,7 @@ Email: jr.aditya004@gmail.com
 
 ---
 
-## 📜 License
+##  License
 
 This project is released for academic and research use.  
 Please cite the accompanying paper if you use this work.
